@@ -1,0 +1,71 @@
+
+// ====================================================================
+// Imports
+// ====================================================================
+@import "partials/variables";
+@import "partials/normalize";
+
+//------centering the cells-----------//
+.wrapper, .board{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+	flex-direction: column;
+}
+.board{
+	flex-direction: row;
+	flex-wrap: wrap;
+	width: 45vw;
+}
+.row{
+	display: flex;
+	flex-direction: row;
+}
+.cell{
+	border: $border;
+	width: $sqSize;
+	height: $sqSize;
+	border-bottom: none;
+	border-left: none;
+	border-right: none;
+}
+
+//drawing the right borders
+#firstRow .cell{
+	border-top: none;
+}
+.center{
+	border-left: $border;
+	border-right: $border;
+}
+
+//header
+.title{
+	font-family: 'Raleway Dots', cursive;
+	text-align: center;
+	font-size: 4rem;
+	color: $blue;
+	margin-top: 1%;
+}
+
+//button
+.button{
+	display: inline-block;
+	color: $red;
+	margin-top: .5rem;
+	background: none;
+	border-radius: 5px;
+}
+.x{
+	background-image: url(http://diegoluis.net/imageRep/tictactoe/x.svg);
+	background-size: 13vw 13vw;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+.o{
+	background-image: url(http://diegoluis.net/imageRep/tictactoe/o.svg);
+	background-size: 13vw 13vw;
+	background-repeat: no-repeat;
+	background-position: center;
+}
