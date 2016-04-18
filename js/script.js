@@ -2,8 +2,11 @@
 var cells = document.getElementsByClassName('cell');
 var x = "x";
 var o = "o";
-var clicked = ["c1", "c2", "c3"];
-var option1 = ["c1", "c2", "c3"];
+var clicked = [];
+var machineClick = [];
+var options = [["c1", "c2", "c3"],["c4","c5","c6"],["c7","c8","c9"],
+["c1","c4","c7"],["c2","c5","c8"],["c3","c6","c9"],["c1","c5","c9"],["c3","c5","c7"]];
+var counter = 0;
 window.onload = function(){
   //add click event to all the cells
   for(var i = 0; i< cells.length; i++){
@@ -14,7 +17,8 @@ window.onload = function(){
       clicked.push(targetId);
       //console.log(clicked);
       //draw the symbol on the board
-      this.classList.add(o);
+      this.classList.add(x);
+      //return clicked;
       threeInLine();
     });
   }
@@ -23,17 +27,30 @@ window.onload = function(){
 // si hay 3 en raya sacar una alerta
 //si no, no pasa nada
 function threeInLine(){
+  //sort the array to compare with the options
   clicked.sort();
-  console.log(isSame);
-  if(isSame){
-    console.log("iguales " + clicked);
-  } else{
-    console.log("clicked " + clicked + " option1 " + option1);
+  console.log(clicked);
+    if(clicked.length>=3){
+      options.forEach(function(element1){
+        counter = 0;
+      element1.forEach(function(e){
+        clicked.forEach(function(c){
+          if(e === c){
+            counter++;
+            console.log(counter + " win " + e);
+          }
+        });
+        console.log(e);
+      });
+    });
   }
-}
 
+
+}
+/*
 var isSame = clicked.length == option1.length && clicked.every(function(element, index) {
     return element === option1[index];
 });
 
 console.log(isSame);
+*/
