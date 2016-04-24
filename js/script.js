@@ -18,6 +18,7 @@ var options = [["c1", "c2", "c3"],["c4","c5","c6"],["c7","c8","c9"],
 var counter = 0;
 //reload button
 var reset = document.getElementById("reset");
+var targetId;
 
 
 //function to add listeners to the cells to fire the functions
@@ -26,49 +27,27 @@ window.onload = function(){
   for(var i = 0; i< cells.length; i++){
     cells[i].addEventListener("click", function(e){
       //store the id of the clicked cell
-      var targetId = e.target.id;
+      targetId = e.target.id;
       //add the id to an array
-      clicked.push(targetId);
-      //console.log(clicked);
+      //clicked.push(targetId);
+      console.log(targetId);
       //draw the symbol on the board
       this.classList.add(x);
       //call the function to test if there is a win
-      threeInLine();
+      threeInLine(x);
     });
   }
 };
-function threeInLine(){
-  //sort the array to compare with the options
-  clicked.sort();
-    //check to see if there is at least 3 cells marked
-    if(clicked.length>=3){
-      //read the array with the options
-      options.forEach(function(element1){
-        //put the counter of cells to zero
-        counter = 0;
-        //read inside each option
-        element1.forEach(function(e){
-          //read inside the clicked cells
-          clicked.forEach(function(c){
-            //if there is a match update the counter
-            if(e === c){
-              counter++;
-              //if the counter has three successes execute the win program
-              if(counter === 3){
-                return win();
-              } else{
-                //juega la máquina
-                playMachine();
-              }
+function threeInLine(letter){
+  for(var i= 0; i<options.length; i++){
+    for(var j= 0; j<options[i].length; j++){
+      if(targetId === options[i][j]){
+        options[i].splice(options[i].indexOf(options[i][j]),1,letter);
+        console.log("iguales " + options[i][j] +" - " +options[i]);
+      }
 
-            }
-        });
-      });
-    });
-  }else{
-    playMachine();
+    }
   }
-
 
 }
 function playMachine(){
