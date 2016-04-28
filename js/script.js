@@ -19,6 +19,7 @@ var counter = 0;
 //reload button
 var reset = document.getElementById("reset");
 var targetId;
+var targetClass;
 
 
 //function to add listeners to the cells to fire the functions
@@ -28,8 +29,16 @@ window.onload = function(){
     cells[i].addEventListener("click", function(e){
       //store the id of the clicked cell
       targetId = e.target.id;
-      //add the id to an array
-      //clicked.push(targetId);
+      //the class of the clicked element
+      targetClass = e.srcElement.className;
+      //checkCell(targetId);
+      //find if there is a class x or o to see if the cell is marked
+      if(targetClass.includes("x", -1)  || targetClass.includes("o", -1)){
+        console.log("existe: " + targetClass);
+      }else{
+        console.log(targetClass);
+      }
+      //
       console.log(targetId);
       //draw the symbol on the board
       this.classList.add(x);
@@ -39,24 +48,42 @@ window.onload = function(){
   }
 };
 function threeInLine(letter){
+  //traverse the array of options
+  //goes one level deep
   for(var i= 0; i<options.length; i++){
+    //goes two levels deep
     for(var j= 0; j<options[i].length; j++){
+      //if the clicked cell coincides with one of the options replace that option with the letter
       if(targetId === options[i][j]){
         options[i].splice(options[i].indexOf(options[i][j]),1,letter);
         console.log("iguales " + options[i][j] +" - " +options[i]);
       }
-
     }
   }
-
+  win(x);
 }
 function playMachine(){
   cellMachine = document.getElementById(picked);
   cellMachine.classList.add(o);
 }
+//check if we have 3 x or 3 o
+function win(letter){
+  //count how many letters we have
+  for(var i= 0; i<options.length; i++){
+    counter = 0;
+    for(var j= 0; j<options[i].length; j++){
+      if(letter === options[i][j]){
+        counter++;
+      }
+    }
+    //if we have 3 letters, player has won
+    if(counter === 3){
+      alert("You have win!");
+    }else{
+      playMachine();
+    }
+  }
 
-function win(){
-  alert("You have win!");
 }
 //function to reload the page
 function resetBoard(){
@@ -64,4 +91,12 @@ function resetBoard(){
 }
 reset.addEventListener("click", resetBoard);
 
+//function that checks if the cell is available
+function checkCell(targetId){
+  if(targetId.className === "x" || targetId.className === "o" ){
+    console.log("existe: " + targetId.className);
+  }else{
+    console.log(targetId.className);
+  }
+}
 //create the logic to mark the cells
