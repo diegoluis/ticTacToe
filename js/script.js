@@ -51,7 +51,7 @@ window.onload = function() {
             }
         });
     }
-};
+
 
 function threeInLine(letter) {
     //traverse the array of options
@@ -69,10 +69,47 @@ function threeInLine(letter) {
     win(letter);
 }
 
+//the machine decides where to put the mark
+function chooseCell() {
+  //if the center or the corner are free put the mark there
+  if (options[0].indexOf("c5") >= 0) {
+      picked = "c5";
+  } else if (options[0].indexOf("c3") >= 0) {
+      picked = "c3";
+  } else if (options[0].indexOf("c1") >= 0) {
+      picked = "c1";
+  }
+  else{
+    orderOptions();
+  }
+}
+//order the options to compare if there is more than one mark in each option to put the machine mark there
+function orderOptions(){
+  console.log("orderOptions()");
+  for(var i= 1; i< options.length; i++){
+    //order the options
+    options[i].forEach(function(){
+      options[i].sort();
+      console.log(options[i]);
+    });
+    for(var j= options[i].length; j>1; j--){
+      //if we have two of the same letter, put the mark there
+      if(options[i][j]==options[i][j-1]){
+        console.log(options[i][j]);
+         return picked = options[i][j-2];
+      }else {
+        console.log("else");
+      }
+    }
+  }
+  //console.log(options);
+}
+
 function playMachine() {
-    chooseCell(o);
+  //choose where to put the mark according to some logic given by the function
+    chooseCell();
     cellMachine = document.getElementById(picked);
-    classMachine = cellMachine.className;
+    //classMachine = cellMachine.className;
     cellMachine.classList.add(o);
     for (var i = 0; i < options.length; i++) {
         //goes two levels deep
@@ -80,13 +117,15 @@ function playMachine() {
             //if the clicked cell coincides with one of the options replace that option with the letter
             if (picked === options[i][j]) {
                 options[i].splice(options[i].indexOf(options[i][j]), 1, o);
-                //console.log("iguales " + options[i][j] + " - " + options[i]);
+                return "done";
             }
         }
     }
 
-
 }
+
+
+
 //check if we have 3 x or 3 o
 function win(letter) {
     //count how many letters we have
@@ -102,36 +141,16 @@ function win(letter) {
             alert("You have win!");
         } else {
             playMachine();
-
+            return "done in win";
         }
     }
 }
+
 //function to reload the page
 function resetBoard() {
     window.location.reload();
 }
 reset.addEventListener("click", resetBoard);
 
-//create the logic to mark the cells
-/* first move:
- -si el centro está tomado, coger una de las esquinas
- -en cualquier otro caso, coger el centro
- second move
- - si el jugador coge una esquina coger la esquina opuesta del mismo lado
- third move:
- - si hay dos os en el mismo lado, poner otra o en la casilla faltante
- -si hay dos x en un mismo lado poner o en la casilla faltante
- */
-/*
-la function tiene la letra, primero miro si el centro está ocupado.
-al final la function retorna el picked cell
-*/
-function chooseCell(letter) {
-  if (options[0].indexOf("c5") >= 0) {
-      picked = "c5";
-  } else if (options[0].indexOf("c3") >= 0) {
-      picked = "c3";
-  } else{
-    console.log("otra opción");
-  }
-}
+
+};
