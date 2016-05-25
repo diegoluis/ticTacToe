@@ -73,7 +73,7 @@ function threeInLine(letter) {
 //the machine decides where to put the mark
 function chooseCell() {
   //only choose one of those options if is the first move
-  if(options[0].indexOf("x")>1){
+  if(options[0].indexOf("x")<0){
     orderOptions();
   }
   //if the center or the corner are free put the mark there
@@ -83,7 +83,16 @@ function chooseCell() {
   } else if (options[0].indexOf("c3") >= 0) {
       picked = "c3";
       changeCells(o);
-  }
+  } else if (options[0].indexOf("c1") >= 0) {
+      picked = "c1";
+      changeCells(o);
+    } else if (options[0].indexOf("c7") >= 0) {
+        picked = "c7";
+        changeCells(o);
+      } else if (options[0].indexOf("c9") >= 0) {
+          picked = "c9";
+          changeCells(o);
+        }
   else{
     orderOptions();
   }
