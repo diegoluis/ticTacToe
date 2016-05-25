@@ -61,6 +61,7 @@ function threeInLine(letter) {
         for (var j = 0; j < options[i].length; j++) {
             //if the clicked cell coincides with one of the options replace that option with the letter
             if (targetId === options[i][j]) {
+              //replace the cell with the letter
                 options[i].splice(options[i].indexOf(options[i][j]), 1, letter);
                 //console.log("iguales " + options[i][j] + " - " + options[i]);
             }
@@ -71,13 +72,17 @@ function threeInLine(letter) {
 
 //the machine decides where to put the mark
 function chooseCell() {
+  //only choose one of those options if is the first move
+  if(options[0].indexOf("x")>1){
+    orderOptions();
+  }
   //if the center or the corner are free put the mark there
-  if (options[0].indexOf("c5") >= 0) {
+   else if (options[0].indexOf("c5") >= 0) {
       picked = "c5";
+      changeCells(o);
   } else if (options[0].indexOf("c3") >= 0) {
       picked = "c3";
-  } else if (options[0].indexOf("c1") >= 0) {
-      picked = "c1";
+      changeCells(o);
   }
   else{
     orderOptions();
@@ -90,16 +95,22 @@ function orderOptions(){
     //order the options
     options[i].forEach(function(){
       options[i].sort();
-      console.log(options[i]);
+      console.log(options);
     });
     for(var j= options[i].length; j>1; j--){
       //if we have two of the same letter, put the mark there
       if(options[i][j]==options[i][j-1]){
-        console.log(options[i][j]);
+        console.log(options);
          return picked = options[i][j-2];
-      }else {
-        console.log("else");
       }
+      /*
+      else if(options[i][j] != o && options[i][j] != x){
+        console.log("else");
+        return picked = options[i][j];
+        //put options in case there is two of the same O
+        //if nothing else, put in the first free cell
+      }
+      */
     }
   }
   //console.log(options);
@@ -111,20 +122,27 @@ function playMachine() {
     cellMachine = document.getElementById(picked);
     //classMachine = cellMachine.className;
     cellMachine.classList.add(o);
-    for (var i = 0; i < options.length; i++) {
-        //goes two levels deep
-        for (var j = 0; j < options[i].length; j++) {
-            //if the clicked cell coincides with one of the options replace that option with the letter
-            if (picked === options[i][j]) {
-                options[i].splice(options[i].indexOf(options[i][j]), 1, o);
-                return "done";
-            }
-        }
-    }
-
+    changeCells(o);
+    //win(o);
 }
 
-
+//we need to create a function that replaces all the c cells with x or O in the options
+function changeCells(letter){
+  cellMachine = document.getElementById(picked);
+  //classMachine = cellMachine.className;
+  cellMachine.classList.add(o);
+  for (var i = 0; i < options.length; i++) {
+      //goes two levels deep
+      for (var j = 0; j < options[i].length; j++) {
+          //if the clicked cell coincides with one of the options replace that option with the letter
+          if (picked === options[i][j]) {
+              options[i].splice(options[i].indexOf(options[i][j]), 1, letter);
+              console.log(options);
+              //return "done";
+         }
+      }
+  }
+}
 
 //check if we have 3 x or 3 o
 function win(letter) {
