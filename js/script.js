@@ -72,30 +72,29 @@ function threeInLine(letter) {
 
 //the machine decides where to put the mark
 function chooseCell() {
-  //only choose one of those options if is the first move
-  if(options[0].indexOf("x")<0){
-    orderOptions();
-  }
-  //if the center or the corner are free put the mark there
-   else if (options[0].indexOf("c5") >= 0) {
-      picked = "c5";
-      changeCells(o);
-  } else if (options[0].indexOf("c3") >= 0) {
-      picked = "c3";
-      changeCells(o);
-  } else if (options[0].indexOf("c1") >= 0) {
-      picked = "c1";
-      changeCells(o);
-    } else if (options[0].indexOf("c7") >= 0) {
-        picked = "c7";
-        changeCells(o);
-      } else if (options[0].indexOf("c9") >= 0) {
-          picked = "c9";
-          changeCells(o);
+    //if already there is an O there choose other options
+    if (options[0].includes("oO")) {
+        orderOptions();
+    } else {
+        //only choose one of those options if is the first move
+        //if the center or the corner are free put the mark there
+        if (options[0].indexOf("c5") >= 0) {
+            picked = "c5";
+            changeCells(o);
+        } else if (options[0].indexOf("c3") >= 0) {
+            picked = "c3";
+            changeCells(o);
+        } else if (options[0].indexOf("c1") >= 0) {
+            picked = "c1";
+            changeCells(o);
+        } else if (options[0].indexOf("c7") >= 0) {
+            picked = "c7";
+            changeCells(o);
+        } else if (options[0].indexOf("c9") >= 0) {
+            picked = "c9";
+            changeCells(o);
         }
-  else{
-    orderOptions();
-  }
+    }
 }
 //order the options to compare if there is more than one mark in each option to put the machine mark there
 function orderOptions(){
@@ -104,21 +103,24 @@ function orderOptions(){
     //order the options
     options[i].forEach(function(){
       options[i].sort();
-      console.log(options);
     });
     for(var j= options[i].length; j>1; j--){
       //if we have two of the same letter, put the mark there
       if(options[i][j]==options[i][j-1]){
-        console.log(options);
-         return picked = options[i][j-2];
+        picked = options[i][j-2];
+        //if the machine picks an already marked cell choose other
+        if(picked =="x" || picked =="oO"){
+          //order the array of all the cells
+          options[0].sort();
+          picked = options[0][0];
+          console.log("ordenado " + picked);
+          return picked;
+        }
+        console.log(picked);
+         return picked;
       }
       /*
-      else if(options[i][j] != o && options[i][j] != x){
-        console.log("else");
-        return picked = options[i][j];
-        //put options in case there is two of the same O
-        //if nothing else, put in the first free cell
-      }
+      revisar las opciones cuando no hay dos elementos, u obligar a que se explore el array
       */
     }
   }
@@ -146,7 +148,6 @@ function changeCells(letter){
           //if the clicked cell coincides with one of the options replace that option with the letter
           if (picked === options[i][j]) {
               options[i].splice(options[i].indexOf(options[i][j]), 1, letter);
-              console.log(options);
               //return "done";
          }
       }
