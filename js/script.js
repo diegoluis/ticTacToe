@@ -61,13 +61,12 @@ function threeInLine(letter) {
             }
         }
     }
-    //win(letter);
     playMachine();
 }
 
 //the machine decides where to put the mark
 function chooseCell() {
-    //if already there is an O there choose other options
+    //if already there is an O there it means is not the first move
     if (options[0].includes("oO")) {
         orderOptions();
     } else {
@@ -97,10 +96,12 @@ function orderOptions(){
   for(var i= 1; i< options.length; i++){
     //order the options
     options[i].forEach(function(){
+      //sort each of the array of the options
       options[i].sort();
     });
     for(var j= options[i].length; j>1; j--){
       //if we have two of the same letter, put the mark there
+      //falta una opción que marque en caso de que solo haya una letra escogida
       if(options[i][j]===options[i][j-1]){
         picked = options[i][j-2];
         //if the machine picks an already marked cell choose other
@@ -109,7 +110,6 @@ function orderOptions(){
           options[0].sort();
           //pick the first one
           picked = options[0][0];
-          console.log("ya ha escogido x o " +  picked );
           if(picked ==="x" || picked ==="oO"){
             win();
             alert("The game has finished, nobody win");
@@ -118,6 +118,10 @@ function orderOptions(){
           return picked;
         }
          return picked;
+      }else if(options[i][j-1].charAt(0)==="c" && options[i][j-2].charAt(0)==="c"){
+        //if (myArray[1].charAt(0) !== 'M') { /* do something */ }
+        picked = options[i][j-2];
+        console.log("empieza por C");
       }
     }
   }
@@ -148,7 +152,6 @@ function changeCells(letter){
 }
 /*
 -tiene un bug, cuando x empieza en casilla intermedia o no responde según donde ponga la siguiente x
-- cuando termine el juego, sacar alerta y después recargar el juego, o preguntar si quiere jugar de nuevo
 - cuando se marca la ultima casilla maquina saca error, solucionarlo
 - cuando x gana en la ultima casilla mostrar que ha ganado
 
@@ -164,7 +167,6 @@ function win() {
       }else if(options[i][0] === o){
         finalAlert(o);
       }
-
     }
 
   }
@@ -174,7 +176,7 @@ function win() {
 //function to show winner or equality
 function finalAlert(letter){
   alert("You have win " + letter);
-  resetBoard();
+  return resetBoard();
 }
 
 //function to reload the page
