@@ -25,11 +25,29 @@ var targetId;
 var targetClass;
 //store true if wins
 var winX = false;
+//store the letter choosed by the user
+var user;
+var letter;
+//selector of letters by the user
+var selector = document.getElementById("selector");
 
-
+//assign the choosed letter
+function selectLetter(){
+  if(user === "xxx"){
+    letter = x;
+  } else if(user === "ooo"){
+    letter = o;
+  }
+  console.log("so the letter is " + letter);
+}
 
 //function to add listeners to the cells to fire the functions
 window.onload = function() {
+  //store the selected letter by the user
+    selector.addEventListener("click",function(e){
+      user = e.target.id;
+      selectLetter();
+    });
     //add click event to all the cells
     for (var i = 0; i < cells.length; i++) {
         cells[i].addEventListener("click", function(e) {
