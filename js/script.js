@@ -23,6 +23,9 @@ var options = [
 var reset = document.getElementById("reset");
 var targetId;
 var targetClass;
+//store true if wins
+var winX = false;
+
 
 
 //function to add listeners to the cells to fire the functions
@@ -101,7 +104,6 @@ function orderOptions(){
     });
     for(var j= options[i].length; j>1; j--){
       //if we have two of the same letter, put the mark there
-      //falta una opción que marque en caso de que solo haya una letra escogida
       if(options[i][j]===options[i][j-1]){
         picked = options[i][j-2];
         //if the machine picks an already marked cell choose other
@@ -111,29 +113,32 @@ function orderOptions(){
           //pick the first one
           picked = options[0][0];
           if(picked ==="x" || picked ==="oO"){
-            win();
             alert("The game has finished, nobody win");
             return resetBoard();
           }
           return picked;
         }
          return picked;
-      }else if(options[i][j-1].charAt(0)==="c" && options[i][j-2].charAt(0)==="c"){
-        //if (myArray[1].charAt(0) !== 'M') { /* do something */ }
+      }//if ther is only one letter in a column
+      else if(options[i][j-1].charAt(0)==="c" && options[i][j-2].charAt(0)==="c"){
         picked = options[i][j-2];
-        console.log("empieza por C");
       }
     }
   }
 }
 
 function playMachine() {
+    win();
   //choose where to put the mark according to some logic given by the function
+  //if there is a win return and exit the function
+  if(winX){
+    return;
+  }
     chooseCell();
     cellMachine = document.getElementById(picked);
     cellMachine.classList.add(o);
     changeCells(o);
-    win();
+    return win();
 }
 
 //we need to create a function that replaces all the c cells with x or O in the options
@@ -151,9 +156,11 @@ function changeCells(letter){
   }
 }
 /*
--tiene un bug, cuando x empieza en casilla intermedia o no responde según donde ponga la siguiente x
-- cuando se marca la ultima casilla maquina saca error, solucionarlo
-- cuando x gana en la ultima casilla mostrar que ha ganado
+
+- para escoger letra, primero se da la opcion al jugador, al hacer click desaparecen las opciones y aparece el tablero
+- la opción escogida se almacena
+- convertir todo a letra en vez de que esté hard-coded el x o el O
+
 
 */
 
@@ -163,18 +170,19 @@ function win() {
     //if the three letters are the same, you have win
     if (options[i][2] === options[i][1] && options[i][1] === options[i][0]) {
       if(options[i][0] === x){
-        finalAlert(x);
+         return finalAlert(x);
       }else if(options[i][0] === o){
-        finalAlert(o);
+        return finalAlert(o);
       }
     }
 
   }
-
+  return;
 }
 
 //function to show winner or equality
 function finalAlert(letter){
+  winX= true;
   alert("You have win " + letter);
   return resetBoard();
 }
@@ -182,6 +190,7 @@ function finalAlert(letter){
 //function to reload the page
 function resetBoard() {
     window.location.reload();
+    return;
 }
 reset.addEventListener("click", resetBoard);
 
