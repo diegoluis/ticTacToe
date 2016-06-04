@@ -17,7 +17,16 @@
     <h1 class="title">Tic Tac Toe</h1>
   </header>
   <div role="main" class="wrapper">
-    <div id="board" class="board">
+    <div class="selector">
+      <h2>Choose your letter</h2>
+      <div class="letter xxx" id="xxx">
+        X
+      </div>
+      <div class="letter ooo" id="ooo">
+        O
+      </div>
+    </div>
+    <div id="board" class="board game">
       <div id="firstRow" class="row">
         <div class="cell topLeft" id="c1">
           &nbsp;
@@ -53,7 +62,7 @@
       </div>
     </div>
     <br />
-    <button id="reset" class="button">Reset Board</button>
+    <button id="reset" class="button game">Reset Board</button>
 
   </div>
   <footer>
