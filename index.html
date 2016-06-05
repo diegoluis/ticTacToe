@@ -2,72 +2,78 @@
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
 <!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+
 <head>
-  <meta charset="utf-8">
-  <title></title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width">
-  <link href='https://fonts.googleapis.com/css?family=Raleway+Dots' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="styles/styles.css">
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <link href='https://fonts.googleapis.com/css?family=Raleway+Dots' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="styles/styles.css">
 
 </head>
+
 <body>
-  <header>
-    <h1 class="title">Tic Tac Toe</h1>
-  </header>
-  <div role="main" class="wrapper">
-    <div class="selector" id="selector">
-      <h2>Choose your letter</h2>
-      <div class="letter xxx" id="xxx">
-        X
-      </div>
-      <div class="letter ooo" id="ooo">
-        O
-      </div>
+    <header>
+        <h1 class="title">Tic Tac Toe</h1>
+    </header>
+    <div role="main" class="wrapper">
+        <div class="selector" id="selector">
+            <h2>Choose your letter</h2>
+            <div class="letter xxx" id="xxx">
+                X
+            </div>
+            <div class="letter ooo" id="ooo">
+                O
+            </div>
+        </div>
+        <div id="boardGame" class="hidden">
+            <div id="board" class="board game">
+                <div id="firstRow" class="row">
+                    <div class="cell topLeft" id="c1">
+                        &nbsp;
+                    </div>
+                    <div class="cell topCenter center" id="c2">
+                        &nbsp;
+                    </div>
+                    <div class="cell topRight" id="c3">
+                        &nbsp;
+                    </div>
+                </div>
+                <div class="row" id="secondRow">
+                    <div class="cell midLeft" id="c4">
+                        &nbsp;
+                    </div>
+                    <div class="cell midCenter center" id="c5">
+                        &nbsp;
+                    </div>
+                    <div class="cell midRight" id="c6">
+                        &nbsp;
+                    </div>
+                </div>
+                <div class="row" id="thirdRow">
+                    <div class="cell btmLeft" id="c7">
+                        &nbsp;
+                    </div>
+                    <div class="cell btmCenter center" id="c8">
+                        &nbsp;
+                    </div>
+                    <div class="cell btmRight" id="c9">
+                        &nbsp;
+                    </div>
+                </div>
+            </div>
+            <br />
+            <button id="reset" class="button game">Reset Board</button>
+        </div>
     </div>
-    <div id="board" class="board game">
-      <div id="firstRow" class="row">
-        <div class="cell topLeft" id="c1">
-          &nbsp;
-        </div>
-        <div class="cell topCenter center" id="c2">
-          &nbsp;
-        </div>
-        <div class="cell topRight" id="c3">
-          &nbsp;
-        </div>
-      </div>
-      <div class="row" id="secondRow">
-        <div class="cell midLeft" id="c4">
-          &nbsp;
-        </div>
-        <div class="cell midCenter center" id="c5">
-          &nbsp;
-        </div>
-        <div class="cell midRight" id="c6">
-          &nbsp;
-        </div>
-      </div>
-      <div class="row" id="thirdRow">
-        <div class="cell btmLeft" id="c7">
-          &nbsp;
-        </div>
-        <div class="cell btmCenter center" id="c8">
-          &nbsp;
-        </div>
-        <div class="cell btmRight" id="c9">
-          &nbsp;
-        </div>
-      </div>
-    </div>
-    <br />
-    <button id="reset" class="button game">Reset Board</button>
+    <footer>
 
-  </div>
-  <footer>
-
-  </footer>
-  <script type= "text/javascript" src="js/script.js"></script>
+    </footer>
+    <script type="text/javascript" src="js/script.js"></script>
 </body>
+
 </html>

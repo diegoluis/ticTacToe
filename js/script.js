@@ -30,6 +30,7 @@ var user;
 var letter;
 //selector of letters by the user
 var selector = document.getElementById("selector");
+var boardGame = document.getElementById("boardGame");
 
 //assign the choosed letter
 function selectLetter(){
@@ -38,7 +39,9 @@ function selectLetter(){
   } else if(user === "ooo"){
     letter = o;
   }
-  console.log("so the letter is " + letter);
+  selector.classList.toggle("hidden");
+  boardGame.classList.toggle("hidden");
+  console.log(letter);
 }
 
 //function to add listeners to the cells to fire the functions

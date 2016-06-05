@@ -114,6 +114,8 @@
 		color: darken($blue, 15%);
 	}
 }
-.game{
-	//display: none;
+.hidden{
+	visibility: hidden;
+  opacity: 0;
+  transition: visibility .5s, opacity .5s linear;
 }
