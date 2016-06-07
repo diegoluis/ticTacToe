@@ -44,7 +44,6 @@ function selectLetter(){
   }
   selector.classList.toggle("hidden");
   boardGame.classList.toggle("hidden");
-  console.log("letteris "+ letter +" and ltmch is "+ letterMach);
 }
 
 //function to add listeners to the cells to fire the functions
@@ -55,7 +54,7 @@ window.onload = function() {
       selectLetter();
     });
     //add click event to all the cells
-    for (var i = 0; i < cells.length; i++) {
+    for (var i = 0, cLn = cells.length; i < cLn; i++) {
         cells[i].addEventListener("click", function(e) {
             //store the id of the clicked cell
             targetId = e.target.id;
@@ -77,14 +76,15 @@ window.onload = function() {
 function threeInLine(letter) {
     //traverse the array of options
     //goes one level deep
-    for (var i = 0; i < options.length; i++) {
+    var opL = options.length;
+    for (var i = 0; i < opL; i++) {
         //goes two levels deep
-        for (var j = 0; j < options[i].length; j++) {
+        var opILn = options[i].length;
+        for (var j = 0; j < opILn; j++) {
             //if the clicked cell coincides with one of the options replace that option with the letter
             if (targetId === options[i][j]) {
               //replace the cell with the letter
                 options[i].splice(options[i].indexOf(options[i][j]), 1, letter);
-                //console.log("iguales " + options[i][j] + " - " + options[i]);
             }
         }
     }
@@ -120,13 +120,15 @@ function chooseCell() {
 }
 //order the options to compare if there is more than one mark in each option to put the machine mark there
 function orderOptions(){
-  for(var i= 1; i< options.length; i++){
+  var opL = options.length;
+  for(var i= 1; i< opL; i++){
     //order the options
     options[i].forEach(function(){
       //sort each of the array of the options
       options[i].sort();
     });
-    for(var j= options[i].length; j>1; j--){
+    var opILn = options[i].length;
+    for(var j= opILn; j>1; j--){
       //if we have two of the same letter, put the mark there
       if(options[i][j]===options[i][j-1]){
         picked = options[i][j-2];
@@ -179,18 +181,11 @@ function changeCells(letter){
       }
   }
 }
-/*
-
-- para escoger letra, primero se da la opcion al jugador, al hacer click desaparecen las opciones y aparece el tablero
-- la opción escogida se almacena
-- convertir todo a letra en vez de que esté hard-coded el x o el O
-
-
-*/
 
 //check if we have 3 x or 3 o
 function win() {
-  for(var i = 1; i<options.length; i++){
+  var opL = options.length;
+  for(var i = 1; i<opL; i++){
     //if the three letters are the same, you have win
     if (options[i][2] === options[i][1] && options[i][1] === options[i][0]) {
       if(options[i][0] === x){
@@ -207,13 +202,13 @@ function win() {
 //function to show winner or equality
 function finalAlert(letter){
   winX= true;
-  alert("You have win " + letter);
+  alert("The " + letter + " have win");
   return resetBoard();
 }
 
 //function to reload the page
 function resetBoard() {
-    window.location.reload();
+    history.go(0);
     return;
 }
 reset.addEventListener("click", resetBoard);
