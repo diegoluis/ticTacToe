@@ -28,6 +28,7 @@ var winX = false;
 //store the letter choosed by the user
 var user;
 var letter;
+var letterMach;
 //selector of letters by the user
 var selector = document.getElementById("selector");
 var boardGame = document.getElementById("boardGame");
@@ -36,12 +37,14 @@ var boardGame = document.getElementById("boardGame");
 function selectLetter(){
   if(user === "xxx"){
     letter = x;
+    letterMach = o;
   } else if(user === "ooo"){
     letter = o;
+    letterMach = x;
   }
   selector.classList.toggle("hidden");
   boardGame.classList.toggle("hidden");
-  console.log(letter);
+  console.log("letteris "+ letter +" and ltmch is "+ letterMach);
 }
 
 //function to add listeners to the cells to fire the functions
@@ -63,9 +66,9 @@ window.onload = function() {
                 alert("Invalid move!");
             } else {
                 //draw the symbol on the board
-                this.classList.add(x);
+                this.classList.add(letter);
                 //call the function to test if there is a win
-                threeInLine(x);
+                threeInLine(letter);
             }
         });
     }
@@ -99,19 +102,19 @@ function chooseCell() {
         //else choose one of the corners
         if (options[0].indexOf("c5") >= 0) {
             picked = "c5";
-            changeCells(o);
+            changeCells(letterMach);
         } else if (options[0].indexOf("c3") >= 0) {
             picked = "c3";
-            changeCells(o);
+            changeCells(letterMach);
         } else if (options[0].indexOf("c1") >= 0) {
             picked = "c1";
-            changeCells(o);
+            changeCells(letterMach);
         } else if (options[0].indexOf("c7") >= 0) {
             picked = "c7";
-            changeCells(o);
+            changeCells(letterMach);
         } else if (options[0].indexOf("c9") >= 0) {
             picked = "c9";
-            changeCells(o);
+            changeCells(letterMach);
         }
     }
 }
@@ -157,15 +160,15 @@ function playMachine() {
   }
     chooseCell();
     cellMachine = document.getElementById(picked);
-    cellMachine.classList.add(o);
-    changeCells(o);
+    cellMachine.classList.add(letterMach);
+    changeCells(letterMach);
     return win();
 }
 
 //we need to create a function that replaces all the c cells with x or O in the options
 function changeCells(letter){
   cellMachine = document.getElementById(picked);
-  cellMachine.classList.add(o);
+  cellMachine.classList.add(letterMach);
   for (var i = 0; i < options.length; i++) {
       //goes two levels deep
       for (var j = 0; j < options[i].length; j++) {

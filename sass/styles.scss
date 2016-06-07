@@ -41,6 +41,12 @@
 	border-right: $border;
 }
 
+//board
+.boardGame{
+	display: flex;
+	flex-direction: column;
+}
+
 //header
 .title{
 	font-family: 'Raleway Dots', cursive;
@@ -99,7 +105,7 @@
 		margin-bottom: 1rem;
 		cursor: pointer;
 	}
-	.xxx{
+	.xxx{ 
 		color: $red;
 	}& :hover{
 		color: darken($red, 15%);
@@ -112,6 +118,14 @@
 		color: darken($blue, 15%);
 	}& :active{
 		color: darken($blue, 15%);
+	}
+	@media screen and (max-width: $small){
+		width: 94%;
+		left: 3%;
+	}
+	@media screen and(max-width: $medium){
+		width:60%;
+		left: 20%;
 	}
 }
 .hidden{
