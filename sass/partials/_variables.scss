@@ -8,3 +8,11 @@ $border: .3rem solid #32373e;
 //media queries
 $small: 450px;
 $medium: 786px;
+
+//mixins
+
+@mixin bgImg($size){
+  background-size: $size $size;
+	background-repeat: no-repeat;
+	background-position: center;
+}

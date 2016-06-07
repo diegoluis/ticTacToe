@@ -17,7 +17,10 @@
 	flex-direction: row;
 	flex-wrap: wrap;
 	width: 45vw;
-	//display: none;
+	@media screen and (max-width: $small){
+		width: 80vw;
+		height: auto;
+	}
 }
 .row{
 	display: flex;
@@ -30,6 +33,10 @@
 	border-bottom: none;
 	border-left: none;
 	border-right: none;
+	@media screen and (max-width: $small){
+		width: $sqSize *1.7;
+		height: $sqSize *1.7;
+	}
 }
 
 //drawing the right borders
@@ -66,15 +73,17 @@
 }
 .x{
 	background-image: url(http://diegoluis.net/imageRep/tictactoe/x.svg);
-	background-size: 13vw 13vw;
-	background-repeat: no-repeat;
-	background-position: center;
+	@include bgImg(13vw);
+	@media screen and(max-width: $small){
+		@include bgImg(13vw *1.7);
+	}
 }
 .oO{
 	background-image: url(http://diegoluis.net/imageRep/tictactoe/o.svg);
-	background-size: 13vw 13vw;
-	background-repeat: no-repeat;
-	background-position: center;
+	@include bgImg(13vw);
+	@media screen and(max-width: $small){
+		@include bgImg(13vw *1.7);
+	}
 }
 //selector of letters
 .selector{
@@ -105,7 +114,7 @@
 		margin-bottom: 1rem;
 		cursor: pointer;
 	}
-	.xxx{ 
+	.xxx{
 		color: $red;
 	}& :hover{
 		color: darken($red, 15%);
