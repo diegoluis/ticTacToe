@@ -33,7 +33,7 @@ var letterMach;
 var selector = document.getElementById("selector");
 var boardGame = document.getElementById("boardGame");
 
-//assign the choosed letter
+//allows the player to select a letter to play with
 function selectLetter(){
   if(user === "xxx"){
     letter = x;
@@ -88,7 +88,8 @@ function threeInLine(letter) {
             }
         }
     }
-    playMachine();
+    //delay a bit the execution of the machine playing
+    window.setTimeout(playMachine, 150);
 }
 
 //the machine decides where to put the mark

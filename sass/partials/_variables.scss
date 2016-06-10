@@ -5,6 +5,7 @@ $gray: rgba(91, 91, 91, 0.5);
 $sqSize : 14.5vw;
 $border: .3rem solid #32373e;
 
+$size : 13vw;
 //media queries
 $small: 450px;
 $medium: 786px;
@@ -15,4 +16,19 @@ $medium: 786px;
   background-size: $size $size;
 	background-repeat: no-repeat;
 	background-position: center;
+  background-clip: border-box;
+  animation-name: growLetter;
+  animation-duration: .25s;
+}
+//animation of letter
+@keyframes growLetter {
+  0%{
+    background-size: 0 0
+  }
+  90%{
+    background-size: $size *1.15 $size *1.15;
+  }
+  100%{
+    background-size: $size $size;
+  }
 }
