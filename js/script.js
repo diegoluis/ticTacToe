@@ -203,7 +203,7 @@ function win() {
 //function to show winner or equality
 function finalAlert(letter){
   winX= true;
-  alert("The " + letter + " have win");
+  alert("The " + letter + " have won");
   return resetBoard();
 }
 
